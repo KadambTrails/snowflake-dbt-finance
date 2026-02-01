@@ -23,7 +23,28 @@ sources:
               - accepted_values:
                   arguments: 
                     values: ['True', 'False']
-  
+
+      - name: raw_transactions
+        description: "Raw transaction data from various sources"
+        columns:
+          - name: trade_id
+            description: "Unique identifier for each transaction"
+            tests:
+              - unique
+              - not_null
+          - name: trader_id
+            description: "Identifier for the trader associated with the transaction"
+            tests:
+              - not_null
+          - name: amount_local
+            description: "Amount involved in the transaction"
+          - name: currency_code
+            description: "Currency code of the transaction amount"
+          - name: transaction_timestamp
+            description: "Date and time when the transaction occurred"
+            tests:
+              - not_null  
+
   - name: marketplace_data
     database: FINANCIAL_SOURCE_DATA
     schema: PUBLIC_DATA_FREE  
