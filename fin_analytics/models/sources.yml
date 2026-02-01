@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: internal_data
+    database: FIN_PROD
+    schema: BRONZE
+    tables:
+      - name: traders 
+        description: "Table containing trader information"
+        columns:
+          - name: trader_id
+            description: "Unique identifier for each trader"
+            tests:
+              - unique
+              - not_null
+          - name: trader_name
+            description: "Full name of the trader"
+          - name: region
+            description: "Region where the trader operates"
+          - name: is_active
+            description: "Indicates if the trader is currently active"
+            data_tests:
+              - accepted_values:
+                  arguments: 
+                    values: ['True', 'False']
+  
+  - name: marketplace_data
+    database: FINANCIAL_SOURCE_DATA
+    schema: PUBLIC_DATA_FREE  
+    tables:
+      - name: FX_RATES_TIMESERIES
